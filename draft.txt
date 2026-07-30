@@ -1,0 +1,5 @@
+index.html 3 commands
+
+git add .
+git commit -m
+git push

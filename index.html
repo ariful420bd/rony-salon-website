@@ -4,395 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rony's Salon — আপনার সেলুন পার্টনার</title>
-    <style>
-        /* ----- স্মুথ স্ক্রলিং ----- */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* ----- রুট ভেরিয়েবল (অ্যাপের বেগুনী রঙ) ----- */
-        :root {
-            --primary: #6A1B9A;      /* গাঢ় বেগুনী */
-            --primary-light: #9C4DCC;
-            --primary-dark: #4A148C;
-            --primary-bg: #F3E5F5;   /* খুব হালকা বেগুনী ব্যাকগ্রাউন্ড */
-        }
-
-        /* ----- রিসেট ও ফন্ট ----- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-            background: #faf8f6;
-            color: #2d2a24;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* ----- হেডার (মেনু) ----- */
-        header {
-            padding: 20px 0;
-            border-bottom: 1px solid #f0eae3;
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.02);
-        }
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        .logo {
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: var(--primary);
-        }
-        .logo span {
-            color: #2d2a24;
-            font-weight: 300;
-        }
-        .nav a {
-            margin-left: 28px;
-            font-weight: 500;
-            color: #5a4e44;
-            transition: color 0.2s;
-            font-size: 0.95rem;
-        }
-        .nav a:hover {
-            color: var(--primary);
-        }
-        @media (max-width: 600px) {
-            .nav a {
-                margin-left: 14px;
-                font-size: 0.85rem;
-            }
-        }
-
-        /* ----- হিরো (Hero) ----- */
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 60px 0 40px;
-            gap: 40px;
-            background: var(--primary-bg);
-            border-radius: 0 0 40px 40px;
-            margin-bottom: 20px;
-        }
-        .hero-text {
-            flex: 1 1 400px;
-        }
-        .hero-text h1 {
-            font-size: clamp(2.2rem, 6vw, 3.6rem);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 18px;
-            color: #1f1b16;
-        }
-        .hero-text h1 .highlight {
-            color: var(--primary);
-        }
-        .hero-text p {
-            font-size: 1.2rem;
-            color: #5a4e44;
-            max-width: 500px;
-            margin-bottom: 32px;
-        }
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 14px 34px;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.25s;
-            border: 2px solid transparent;
-            cursor: pointer;
-            background: white;
-            color: #2d2a24;
-            border-color: #ddd;
-        }
-        .btn-primary {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            box-shadow: 0 8px 20px rgba(106, 27, 154, 0.25);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(106, 27, 154, 0.35);
-        }
-        .btn-outline {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-        .hero-image {
-            flex: 1 1 300px;
-            text-align: center;
-        }
-        .hero-image .mockup-emoji {
-            font-size: 120px;
-            line-height: 1;
-            display: block;
-            background: white;
-            padding: 30px 20px;
-            border-radius: 48px;
-            box-shadow: 0 10px 30px rgba(106, 27, 154, 0.10);
-        }
-
-        /* ----- সেকশন টাইটেল ----- */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-        .section-sub {
-            text-align: center;
-            color: #6b5f53;
-            margin-bottom: 48px;
-        }
-
-        /* ----- ফিচার (Feature) ----- */
-        .features {
-            padding: 60px 0 40px;
-            scroll-margin-top: 80px;
-        }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-        }
-        .feature-card {
-            background: white;
-            padding: 28px 22px;
-            border-radius: 28px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.03);
-            transition: 0.25s ease;
-            border: 1px solid #f0eae3;
-            text-align: center;
-        }
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 40px rgba(106, 27, 154, 0.08);
-            border-color: var(--primary-light);
-        }
-        .feature-icon {
-            font-size: 44px;
-            margin-bottom: 14px;
-        }
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-        }
-        .feature-card p {
-            color: #6b5f53;
-            font-size: 0.95rem;
-        }
-
-        /* ----- এবাউট (About Us) ----- */
-        .about {
-            padding: 60px 0 40px;
-            scroll-margin-top: 80px;
-        }
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px 48px;
-            border-radius: 32px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.03);
-            border: 1px solid #f0eae3;
-            text-align: center;
-        }
-        .about-content p {
-            font-size: 1.1rem;
-            color: #4a3f35;
-            margin-bottom: 16px;
-        }
-        .tech-badge {
-            display: inline-block;
-            background: var(--primary-bg);
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 0.9rem;
-            margin: 4px;
-        }
-
-        /* ----- যোগাযোগ (Contact) ----- */
-        .contact {
-            padding: 60px 0 40px;
-            scroll-margin-top: 80px;
-        }
-        .contact-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-        }
-        .contact-card {
-            background: white;
-            padding: 32px 40px;
-            border-radius: 28px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.03);
-            border: 1px solid #f0eae3;
-            min-width: 240px;
-            text-align: center;
-            transition: 0.2s;
-        }
-        .contact-card:hover {
-            border-color: var(--primary-light);
-        }
-        .contact-card .icon {
-            font-size: 36px;
-            display: block;
-            margin-bottom: 12px;
-        }
-        .contact-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 6px;
-            color: #2d2a24;
-        }
-        .contact-card a {
-            color: var(--primary);
-            font-weight: 500;
-            word-break: break-all;
-        }
-        .contact-card a:hover {
-            text-decoration: underline;
-        }
-
-        /* ----- ডাউনলোড (Download) ----- */
-        .download {
-            background: var(--primary-dark);
-            color: #f5f0eb;
-            border-radius: 40px;
-            padding: 50px 40px;
-            margin: 40px 0 60px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-            scroll-margin-top: 80px;
-        }
-        .download-text h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .download-text p {
-            color: #d1c4e9;
-            max-width: 400px;
-        }
-        .download .btn-primary {
-            background: white;
-            color: var(--primary-dark);
-            border-color: white;
-            box-shadow: none;
-        }
-        .download .btn-primary:hover {
-            background: #f3e5f5;
-            transform: scale(1.02);
-        }
-
-        /* ----- ফুটার (Footer) ----- */
-        footer {
-            border-top: 1px solid #e6ded6;
-            padding: 30px 0 20px;
-            text-align: center;
-            color: #6b5f53;
-            font-size: 0.9rem;
-        }
-        footer a {
-            color: var(--primary);
-            font-weight: 500;
-        }
-        footer .social-links a {
-            margin: 0 10px;
-        }
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-top: 8px;
-        }
-        .footer-social a {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.2s;
-        }
-        .footer-social a:hover {
-            color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        .fb-icon {
-            width: 22px;
-            height: 22px;
-            fill: #1877F2;
-            transition: 0.2s;
-        }
-        .footer-social a:hover .fb-icon {
-            fill: #0d65d9;
-        }
-
-        /* ----- রেস্পন্সিভ ----- */
-        @media (max-width: 768px) {
-            .header-inner {
-                flex-direction: column;
-                gap: 12px;
-            }
-            .nav a {
-                margin: 0 10px;
-            }
-            .hero {
-                padding: 30px 0 20px;
-            }
-            .download {
-                flex-direction: column;
-                text-align: center;
-                padding: 30px 20px;
-            }
-            .download-text p {
-                max-width: 100%;
-            }
-            .about-content {
-                padding: 24px 20px;
-            }
-            .contact-card {
-                min-width: 100%;
-            }
-        }
-    </style>
+    <!-- 🔗 আলাদা CSS ফাইল লিংক -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -408,7 +21,7 @@
     </header>
 
     <main>
-        <!-- ====== হিরো সেকশন (বেগুনী ব্যাকগ্রাউন্ড) ====== -->
+        <!-- ====== হিরো সেকশন ====== -->
         <section class="container hero">
             <div class="hero-text">
                 <h1>
@@ -519,7 +132,8 @@
                         (Android ৬.০+)
                     </p>
                 </div>
-                <a href="https://release-assets.githubusercontent.com/github-production-release-asset/1317090967/c41b4ec9-cb6e-4086-80a8-9df4bf0c7183?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-07-30T11%3A40%3A26Z&rscd=attachment%3B+filename%3DRony.s.Salon.App.v1.0.0.apk&rsct=application%2Fvnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-07-30T10%3A39%3A57Z&ske=2026-07-30T11%3A40%3A26Z&sks=b&skv=2018-11-09&sig=rNebq9x%2B0GBOiWrY9AxTqQcHNo0O1EJM02RtKz8%2BMIo%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NTQxMDgzNCwibmJmIjoxNzg1NDA5MDM0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.Zw35IFpEynBNfcrkJPgt9E76ZsjubfxAjAmfP91TvUs&response-content-disposition=attachment%3B%20filename%3DRony.s.Salon.App.v1.0.0.apk&response-content-type=application%2Fvnd.android.package-archive" 
+                <!-- 🔽 আপডেট করা ডাউনলোড লিংক (Google Drive) -->
+                <a href="https://drive.usercontent.google.com/download?id=1Ap0QK5VniCZabmXob6SQlRQOiAQLig2b&export=download&confirm=t&uuid=1646c984-bb63-4270-9757-3128655ef534&at=AFYLz4OLO-ysQ6bwB1KMicVTzG7B%3A1785426264978" 
                    target="_blank" 
                    class="btn btn-primary">
                     ⬇️ ডাউনলোড (v1.0.0)
@@ -533,13 +147,11 @@
         <div class="container">
             <p>
                 &copy; ২০২৬ Rony's Salon &mdash; ariful420bd
-                <!-- "ওপেন সোর্স (MIT)" মুছে ফেলা হয়েছে -->
             </p>
             <div class="footer-social">
                 <span>📧 <a href="mailto:mariful.islambd95@gmail.com">mariful.islambd95@gmail.com</a></span>
                 <span>|</span>
                 <a href="https://www.facebook.com/ariful420bd/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px;">
-                    <!-- ফেসবুকের সুন্দর SVG আইকন -->
                     <svg class="fb-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
@@ -549,7 +161,7 @@
         </div>
     </footer>
 
-    <!-- ছোট JavaScript (ক্লিক ট্র্যাকিং) -->
+    <!-- ছোট JavaScript -->
     <script>
         document.querySelector('.download .btn')?.addEventListener('click', function(e) {
             console.log('📥 ডাউনলোড শুরু হচ্ছে...');
